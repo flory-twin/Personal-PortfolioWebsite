@@ -1,18 +1,19 @@
 /* This CSS copied from https://startbootstrap.com/snippets/full-image-background/, 2020-01-27.
    Some modifications made per https://mdbootstrap.com/docs/jquery/css/background-image/ for code clarity. */
 .background-img-signature-fill {
-  background-image: url("../Signature-AsBackground.jpg");
+  background-image: url("../Signature-AsBackground-ReducedIntensity-I.jpg");
   
   /*width: 100%;*/
   
   /* I know scroll is the default; adding it for my own understanding. */
   /*background-attachment: scroll;*/
   background-repeat: no-repeat;
-  background-position: center top; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+  /*background-position: center top;*/ 
+  /*background-size: contain;*/
+  background-size: auto 100%;
+  -webkit-background-size: auto 100%;
+  -moz-background-size: auto 100%;
+  -o-background-size: auto 100%;
 }
 
 .background-color-signature-underlay {
