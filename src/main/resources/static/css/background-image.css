@@ -1,14 +1,14 @@
 /* This CSS copied from https://startbootstrap.com/snippets/full-image-background/, 2020-01-27.
    Some modifications made per https://mdbootstrap.com/docs/jquery/css/background-image/ for code clarity. */
 .background-img-signature-fill {
-  background-image: url("../Signature-AsBackground-WithVerticalOffset.jpg");
+  background-image: url("../Signature-AsBackground.jpg");
   
   /*width: 100%;*/
   
   /* I know scroll is the default; adding it for my own understanding. */
-  background-attachment: scroll;
+  /*background-attachment: scroll;*/
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center top; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
