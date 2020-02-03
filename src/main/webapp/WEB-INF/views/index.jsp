@@ -23,25 +23,41 @@
 	</head>
 	<!-- KDF note to self: Background: Set the background color to an underlay for the signature picture. -->
 	<body class="background-color-signature-underlay">
-		
-		<!-- KDF note to self: Use Bootstrap, rather than native CSS, to make sure the entire signature shows up properly. 
-		     Even though 'sticky' doesn't work in IE 10/11, it doesn't break much since this is largely a 1-screen page.-
-		     Note that setting the width to 100% of the initial viewport will always just get the visible viewport,
-		       even if the page contents contained within the div extend beyond the viewport. 
-		     The image in question is 3812x1908. While I hate to code a hard dependency in this messy way,
-		       setting min-vw in this way guarantees that I get the full image, not just a version 
-		       clipped to the height of the contents. -->
-			<div class="container background-img-signature-fill-linebox">
+			<header class="background-img-signature-fill-linebox">
 				<!-- NTS: FInd some way around the awkward manual spacer insertion required to bring the contained elements large enough to match the size ration of the background image. -->
-				<div class="container center-block align-middle my-5 py-5">
+				<div class="text-center align-middle my-5 py-5">
 					<!-- Poor man's small caps -->
 					<!-- TODO: Extract shared JavaScript function to create this code based on input of an arbitrary string and a total percentage of screen width. -->
 						<span class="text-uppercase" style="font-size:9vw;">K</span>
 						<span class="text-uppercase" style="font-size:8vw;">evin&nbsp;&nbsp;</span>
 						<span class="text-uppercase" style="font-size:9vw;">F</span>
 						<span class="text-uppercase" style="font-size:8vw;">lory</span>
-						<p/>
 				</div>
+			</header>
+			
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-4">
+					<div class="mr-5">
+						<div class="jumbotron center-block">
+							<img src="../Code-I.png" class="mw-100"/>
+							<div class="center-block">
+								<span class="text-uppercase" style="font-size:4vw;">Code</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="ml-5">
+						<div class="jumbotron">
+							<img src="../700px-Renaisscylon.jpg" class="mw-100 mh-80"/>
+							
+								<p class="text-uppercase center-block" style="font-size:4vw;">Art</p>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2"></div>
 			</div>
 
 		
