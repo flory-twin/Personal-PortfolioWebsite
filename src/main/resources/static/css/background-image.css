@@ -1,7 +1,7 @@
 /* This CSS copied from https://startbootstrap.com/snippets/full-image-background/, 2020-01-27.
    Some modifications made per https://mdbootstrap.com/docs/jquery/css/background-image/ for code clarity. */
 .background-img-signature-fill-linebox {
-  background-image: url("../Signature-AsBackground-ReducedIntensity-II.jpg");
+  background-image: url("../images/Signature-AsBackground-ReducedIntensity-II.jpg");
   
   /*width: 100%;*/
   
@@ -17,7 +17,7 @@
 }
 
 .background-img-signature-fill {
-  background-image: url("../Signature-AsBackground-ReducedIntensity-I.jpg");
+  background-image: url("../images/Signature-AsBackground-ReducedIntensity-II.jpg");
   
   /*width: 100%;*/
   

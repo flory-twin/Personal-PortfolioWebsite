@@ -40,7 +40,7 @@
 				<div class="col-sm-4">
 					<div class="mr-5">
 						<div class="jumbotron center-block">
-							<img src="../Code-I.png" class="mw-100"/>
+							<img src="/images/Code-I.png" class="mw-100"/>
 							<div class="center-block">
 								<span class="text-uppercase" style="font-size:4vw;">Code</span>
 							</div>
@@ -50,7 +50,7 @@
 				<div class="col-sm-4">
 					<div class="ml-5">
 						<div class="jumbotron">
-							<img src="../700px-Renaisscylon.jpg" class="mh-80"/>
+							<img src="/images/700px-Renaisscylon.jpg" class="mh-80"/>
 							
 								<p class="text-uppercase center-block" style="font-size:4vw;">Art</p>
 							
