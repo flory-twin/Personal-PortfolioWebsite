@@ -50,7 +50,7 @@
 				<div class="col-sm-4">
 					<div class="ml-5">
 						<div class="jumbotron">
-							<img src="../700px-Renaisscylon.jpg" class="mw-100 mh-80"/>
+							<img src="../700px-Renaisscylon.jpg" class="mh-80"/>
 							
 								<p class="text-uppercase center-block" style="font-size:4vw;">Art</p>
 							
