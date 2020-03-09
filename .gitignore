@@ -58,6 +58,6 @@ build/
 .vscode/
 
 # -----------------------------------------------------------------------------
-# Places properties files outside version control.
+# Places all properties files outside version control.
 # -----------------------------------------------------------------------------
 **/*.properties
