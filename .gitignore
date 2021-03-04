@@ -1,5 +1,11 @@
 # -----------------------------------------------------------------------------
-# This .gitignore provided by Antonella Solomon, Grand Circus Java Bootcamp, Fall 2019.
+# Places keys outside version control.
+# -----------------------------------------------------------------------------
+**/*key*.properties
+**/*Key*.properties
+
+# -----------------------------------------------------------------------------
+# .gitignore after this point originaly provided by Antonella Solomon, Grand Circus Java Bootcamp, Fall 2019.
 # -----------------------------------------------------------------------------
 
 # Eclipse
@@ -56,8 +62,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-# -----------------------------------------------------------------------------
-# Places properties files outside version control.
-# -----------------------------------------------------------------------------
-**/*.properties
