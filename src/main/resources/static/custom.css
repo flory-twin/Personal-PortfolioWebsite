@@ -1,0 +1,16 @@
+.signature-behind {
+    background-image: url("Signature-masked.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.statue-behind {
+    background-image: url("/art/AdmiralPerry/admiralPerry4.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.custom-gray {
+	background-color: #D6D5D0;
+}
