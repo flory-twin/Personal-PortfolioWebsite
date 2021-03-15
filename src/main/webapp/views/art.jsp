@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 	<!-- ---------------------------------------------------------------------------------------- -->
@@ -23,21 +27,20 @@
 			
 			<div class="container signature-behind py-5">
 				<h1 class="display-1 text-center justify-content-center">Kevin Flory</h1>
-				<!-- <img class="img-fluid" alt="" src="Signature-masked.jpg">  --> 
 			</div>
 			
 			<div class="container">
-			  <div class="row">
-			    <div class="col-sm">
-			    	<img src="/art/20140516-2.jpeg" width="100%">
-			    </div>
-			    <div class="col-sm">
-					<img src="/art/20140516-1.v2.jpeg" width="100%">
-			    </div>
-			    <div class="col-sm">
-			      <img src="/art/20140526-wildwood-5.jpg" width="100%">
-			    </div>
-			  </div>
+				<c:forEach var="row" varStatus="rowStatus" items="${imagePaths}">
+				<c:set var="rowNum" value="${rowStatus.getCount()}"/>
+				<div class="row" id="row${rowNum}">
+					<c:forEach var="col" varStatus="colStatus" items="${row}">
+					<c:set var="colNum" value="${colStatus.getCount()}"/>
+					<div id="row${rowNum}col${colNum}" class="col-sm m-2">
+						<img src="${col.path}" class="img-fluid"/>
+					</div>
+					</c:forEach>
+				</div>
+				</c:forEach>
 			</div>
 			
 			<div class="nav justify-content-center fixed-bottom navbar-light bg-dark text-white">

@@ -6,7 +6,7 @@ let artCard=`
   <div class="card-body">
     <h5 class="card-title">Art</h5>
     <p class="card-text">I'm an amateur watercolorist. See some of my work using the button below.</p>
-    <a href="/art.html" class="btn btn-primary">See All Art</a>
+    <a href="/art" class="btn btn-primary">See All Art</a>
   </div>
 </div>`
 

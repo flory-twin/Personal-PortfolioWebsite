@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+// NTS: 
 public class IndexController
 {
-   @GetMapping(value={"/", "/index.html"})
-   public ModelAndView returnIndexPage()
+   @GetMapping(value={"/", "/index"})
+   public String returnIndexPage()
    {
-      return new ModelAndView("index");
+      return "index";
    }
 }

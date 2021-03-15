@@ -1,8 +1,8 @@
 .signature-behind {
-    background-image: url("Signature-masked-graduated.jpg");
+    background-image: url("Signature-masked.jpg");
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 }
 
 .statue-behind {
