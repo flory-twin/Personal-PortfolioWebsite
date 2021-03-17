@@ -29,14 +29,16 @@
 				<h1 class="display-1 text-center justify-content-center">Kevin Flory</h1>
 			</div>
 			
-			<div class="container">
+			<div class="container mh-75">
 				<c:forEach var="row" varStatus="rowStatus" items="${imagePaths}">
 				<c:set var="rowNum" value="${rowStatus.getCount()}"/>
 				<div class="row" id="row${rowNum}">
 					<c:forEach var="col" varStatus="colStatus" items="${row}">
 					<c:set var="colNum" value="${colStatus.getCount()}"/>
-					<div id="row${rowNum}col${colNum}" class="col-sm m-2">
-						<img src="${col.path}" class="img-fluid"/>
+					<div id="row${rowNum}col${colNum}" class="col-sm m-2 h-25">
+					  <div class="card-body">
+				    	<img src="${col.relativeResourcePath}" style="max-height:100%;max-width:25%"/>
+					  </div>
 					</div>
 					</c:forEach>
 				</div>

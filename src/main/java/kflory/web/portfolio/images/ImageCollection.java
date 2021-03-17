@@ -1,11 +1,36 @@
 package kflory.web.portfolio.images;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystemException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.FileSystemResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 /**
  * I want to collect a set of images from the filesystem on startup, index them arbitrarily, and then use a URL or cookie fetch scheme to let a site user page through the set of images.
  * This is the first step--providing a 'wireframe' object.
@@ -15,20 +40,84 @@ import org.springframework.context.annotation.Bean;
 @Component
 @Scope("singleton")
 public class ImageCollection {
+	//Note to self: When running as a test (@SpringBootTest, not unit) the following injectible beans either inject as null or can't find resources on the requested path:
+	// ApplicationContext: Autowires as null.
+	// FileSystemResourceLoader, FileSystemXmlApplicationContext: Autowires as null.
+	// ServletContext, PathMatchingResourcePatternResolver: Resolve resources (.getResource()...) against Maven's runtime classpath (.../target...). Do note that .getRealPath("/resources") seems to work with the ServletContext, which is particularly interesting as it should be a MockServletContext. 
 	
-	@Value("${art.rowCount}")
-	private int rowCount;
+	@Value("${art.relativeResourceFolder}")
+	private String artDirectoryRelativePath;
+	private String artDirectoryTargetRelativePath="art/";
 	
-	@Value("${art.colCount}")
-	private int colCount;
-	
+	@Value("${art.filetypes}")
+	private String filetypesString;
+	//Can't use static initializer block to parse filetypes because art.relativeResourceFolder isn't available until after construction.
+	private String[] filetypes = null;
+
 	private static ArrayList<Image> allImages;
 	static {
 		allImages = new ArrayList<Image>();
 	}
 	
 	public ImageCollection() {
+	}
+	
+	@PostConstruct 
+	public void loadFromFileSystem() throws FileSystemException, IOException {
+		loadFromFileSystem(artDirectoryRelativePath);
+	}
+	
+	/**
+     *
+	 * @param root A set of folder names separated by the path separator /. / at either end are optional.
+	 * @throws FileSystemException
+	 * @throws IOException
+	 */
+	public void loadFromFileSystem(String root) throws FileSystemException, IOException {
+		//Because a property must be loaded before filetypes can be parsed--and properties aren't available until after construction--filetypes MUST be parsed before use.
+		parseFiletypes();
 		
+		// Note to self: What with the differing conditions available in test vs. non-test, while I tried using various entities injected by the container, none of them worked reliably (different points of initialization, some weren't initialized/were mocks, etc.)
+		// As such, initializing my own instance of a resource loader was far more controllable at this point of expertise.
+		FileSystemXmlApplicationContext fsxac = new FileSystemXmlApplicationContext();
+		// Despite--or due to--the wide array of path choices Spring allows, and how different ResourceLoaders accept different forms--I had to experiment. 
+		// Ultimately, only roots formed as /a/b/c/ will work properly. These then get submitted as shown below.
+		String globPattern = "";
+		if (!root.startsWith("/"))
+		{
+			root = "/" + root;
+		}
+		
+		if (!root.endsWith("/")) {
+			root += "/";
+		}
+		
+		//Yes--adding a directory glob on front is counterintuitive, but (at least in a test context) necessary.
+		globPattern = "**" + root + "**/*";
+		
+		ArrayList<Resource> artResources = new ArrayList<Resource>(filetypes.length);
+		for (String filetype : filetypes) {
+			artResources.addAll(
+				new ArrayList<Resource>(
+					Arrays.asList(
+						fsxac.getResources(globPattern + filetype))));
+		}
+		
+		ImageCollection.clear();
+		
+		//Before continuing, remove the leading / so arbitrary consumers will treat the resulting string like a relative path, not an absolute path.
+		root = root.substring(1);
+		//Now reformat so the target root can be found in a system-canonical path.
+		String targetRootAsCanonicalFragment = this.artDirectoryTargetRelativePath.replace("/", File.separator);
+		for (Resource r : artResources)
+		{
+			String pathString = r.getFile().getPath(); 
+			ImageCollection.addImage(
+				new Image(
+					pathString.substring(
+						pathString.indexOf(targetRootAsCanonicalFragment))
+					.replace(File.separator, "/")));
+		}
 	}
 	
 	/**
@@ -90,12 +179,18 @@ public class ImageCollection {
 		return imageArr;
 	}
 	
-	public void addImage(Image toAdd) {
+	public static void addImage(Image toAdd) {
 		allImages.add(toAdd);
 	}
 	
-	public void clear()
+	public static void clear()
 	{
 		allImages.clear();
+	}
+	
+	private void parseFiletypes() {
+		if (filetypes == null) {
+			filetypes = filetypesString.split(",");
+		}
 	}
 }

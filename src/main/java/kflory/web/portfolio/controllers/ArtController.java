@@ -17,7 +17,7 @@ import kflory.web.portfolio.images.ImageCollection;
 public class ArtController {
 	
 	@Autowired
-	ImageCollection ic;
+	private ImageCollection ic;
 	
 	@Value("${art.rowCount}")
 	private int rowCount;
@@ -30,12 +30,6 @@ public class ArtController {
 	public ModelAndView respondWithArtPage(
 			@RequestParam(defaultValue="0") int startingFrom) 
 	{
-		//Temporary boilerplate so the site has something to display.
-		ic.clear();
-		ic.addImage(new Image("/art/20140516-2.jpeg"));
-		ic.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ic.addImage(new Image("/art/20140526-wildwood-5.jpg"));
-		
 		return new ModelAndView("art", 
 				new ModelMap("imagePaths", ic.getImageArray(startingFrom, rowCount, colCount))
 				.addAttribute("rowCount", rowCount)

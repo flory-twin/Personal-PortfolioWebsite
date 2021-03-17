@@ -51,21 +51,11 @@ public class ArtControllerTest {
 	
 	@Test
 	public void testGetFromZero() throws Exception {
-		/*
-		ic.clear();
-		//No images: Still has 3x3, none are filled in
-		assertThat(
-			this.restTemplate.getForObject(
-				"http://localhost:" + port + "/art" + "?startingFrom=0",
-				String.class))
-			.contains("<div id=\"row3col3")
-			.doesNotContainPattern("<img src=\"[A-Za-z1-9\\/]");
-		
 		ic.clear();
 		ic.addImage(new Image("/art/20140516-2.jpeg"));
 		ic.addImage(new Image("/art/20140516-1.v2.jpeg"));
 		ic.addImage(new Image("/art/20140526-wildwood-5.jpg"));
-		*/
+
 		//3 images: Still has 3x3, and if started <= index=2, some are onscreen.
 		assertThat(
 			this.restTemplate.getForObject(
