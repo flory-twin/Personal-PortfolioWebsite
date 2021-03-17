@@ -20,6 +20,7 @@
 		<main>
 			<!--  Looking for Kevin's Grand Circus graduation project?  -->
 			<div class="container-fluid mt-5 mb-3">
+				<!-- TODO: Encapsulate as tag; see https://stackoverflow.com/questions/23604033/is-including-other-jsp-via-the-spring-mvc-framework-a-good-idea and https://docs.oracle.com/javaee/5/tutorial/doc/bnama.html. -->
 				<div 
 					class="container signature-behind justify-content-center mt-5" 
 					style="min-height:25vh;max-height:30vh;max-width:73vw">
@@ -61,24 +62,7 @@
 				</div>
 			</div>
 			
-			<div class=".container-fluid justify-content-center fixed-bottom bg-dark text-white">
-				<div class="row">
-					<div class="col-6">
-						<p class="text-right">Built with: 
-							<a href="https://spring.io/projects/spring-boot">Spring Boot</a>, 
-							<a href="https://getbootstrap.com/">Bootstrap</a>, 
-							Java, JavaScript, HTML, CSS.
-						</p>
-					</div>
-					<div class="col-6">
-						<p>
-							See the code: 
-								<a href="https://github.com/flory-twin/Personal-PortfolioWebsite">https://github.com/flory-twin/Personal-PortfolioWebsite
-								</a>
-						</p>
-					</div>
-				</div>
-			</div>
+			<%@include file="/views/fragments/builtWith.jspf" %>
 		</main>
 		
 		<script src="js/index.js"></script>

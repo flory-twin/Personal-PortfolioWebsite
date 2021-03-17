@@ -17,7 +17,7 @@
 		<!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3Fme2BM4boCE9tHx9zHvcxaQoAkksPQa/8oyn1Dzqv7gdcXChereUsXGx6LtbqA" crossorigin="anonymous"> -->
 		<!-- <link href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<link href="custom.css" rel="stylesheet"/>
+		<link href="css/index.css" rel="stylesheet"/>
 	</head>
 	
 
@@ -45,9 +45,7 @@
 				</c:forEach>
 			</div>
 			
-			<div class="nav justify-content-center fixed-bottom navbar-light bg-dark text-white">
-				<i>Built with:</i>  Spring Boot  *  Bootstrap  *  JavaScript, CSS, HTML
-			</div>
+			<%@include file="/views/fragments/builtWith.jspf" %>
 		</main>
 		
 		<script src="custom.js"></script>
