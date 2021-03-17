@@ -1,12 +1,27 @@
 .signature-behind {
-    background-image: url("Signature-masked.jpg");
+    background-image: url("images/Signature-masked.jpg");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 
+.eclipse-behind {
+    background-image: url("images/eclipseView2-masked.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 100%;
+}
+
 .statue-behind {
     background-image: url("/art/AdmiralPerry/admiralPerry4.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.upperpeninsula-behind {
+    background-image: url("images/UpperPeninsula-2019-2-masked.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;

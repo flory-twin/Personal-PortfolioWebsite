@@ -20,20 +20,35 @@
 	<body>
 		<main>
 			<!--  Looking for Kevin's Grand Circus graduation project?  -->
-			
-			<div class="container signature-behind justify-content-center py-5 mt-3">
-				<h1 class="display-1 text-center"><b>Kevin Flory</b></h1>
-			</div>
-			
-			<div class="container">
-				<div class="row">
-					<div class="col-5">
-						<button type="button" class="btn btn-primary" id="codeButton" onclick="swapCodeCard()">Code</button>
+			<div class="container justify-content-center mt-3 mb-5">
+				<div 
+					class="container signature-behind justify-content-center" 
+					style="min-height:25vh;max-height:30vh;max-width:73vw">
+					<h1 class="display-2 text-center"><b>Kevin Flory</b></h1>
+				</div>
+				
+				<div class="container">
+					<div class="row mt-3 mb-5 mx-5 pb-5">
+						<div class="col ml-5 pr-2 pt-1">
+							<button 
+								id="codeButton"
+								class="btn eclipse-behind p-4" 
+								style="min-height:40vh;min-width:27vw" 
+								onclick="swapCodeCard()">
+	    							<h2 class="display-4 text-center"><b>Code</b></h2>
+							</button>
+						</div>
+						<div class="col mr-5 pl-2 pt-1">
+							<button 
+								id="artButton"
+								class="btn upperpeninsula-behind p-4" 
+								style="min-height:40vh;min-width:27vw" 
+								onclick="swapArtCard()">
+	    							<h2 class="display-4 text-center"><b>Art</b></h2>
+							</button>
+						</div>
 					</div>
-					<div class="col-2"></div>
-					<div class="col-5">
-						<button type="button" class="btn btn-primary" id="artButton" onclick="swapArtCard()">Art</button>
-					</div>
+				</div>
 			</div>
 			
 			<div class=".container-fluid justify-content-center fixed-bottom bg-dark text-white">
