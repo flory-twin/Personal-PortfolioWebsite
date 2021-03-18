@@ -1,23 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
-<html lang="en">
-	<!-- ---------------------------------------------------------------------------------------- -->
-	<!-- THIS PAGE REQUIRES PARAMETERS: -->
-	<!-- ---------------------------------------------------------------------------------------- -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
-	    <!-- Required meta tags -->
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta charset="utf-8"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
 		
 
 		<title>Kevin's Art</title>
 		<!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3Fme2BM4boCE9tHx9zHvcxaQoAkksPQa/8oyn1Dzqv7gdcXChereUsXGx6LtbqA" crossorigin="anonymous"> -->
 		<!-- <link href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>-->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link 
+			rel="stylesheet" 
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+			crossorigin="anonymous"/>
 		<link href="css/index.css" rel="stylesheet"/>
+		<link href="css/debug.css" rel="stylesheet"/>
 	</head>
 	
 
@@ -29,17 +31,20 @@
 				<h1 class="display-1 text-center justify-content-center">Kevin Flory</h1>
 			</div>
 			
-			<div class="container mh-75">
+			<div id="thumbnailArray"
+				class="container" 
+				style="min-height:70vh">
 				<c:forEach var="row" varStatus="rowStatus" items="${imagePaths}">
 				<c:set var="rowNum" value="${rowStatus.getCount()}"/>
 				<div class="row" id="row${rowNum}">
 					<c:forEach var="col" varStatus="colStatus" items="${row}">
 					<c:set var="colNum" value="${colStatus.getCount()}"/>
-					<div id="row${rowNum}col${colNum}" class="col-sm m-2 h-25">
-					  <div class="card-body">
-				    	<img src="${col.relativeResourcePath}" style="max-height:100%;max-width:25%"/>
-					  </div>
-					</div>
+					<div id="row${rowNum}col${colNum}" class="col text-center" style="max-height:33vh;min-height:33vh"> 
+				    	<img 
+				    		class="btn p-2" 
+				    		src="${col.relativeResourcePath}" 
+				    		style="max-height:100%;max-width:100%"/> 
+ 				    	</div>	
 					</c:forEach>
 				</div>
 				</c:forEach>

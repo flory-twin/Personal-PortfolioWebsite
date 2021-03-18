@@ -164,7 +164,7 @@ public class ImageCollection {
 			// At present, these should be divided into three arrays of three each.
 			for (int rowNum = 1; rowNum <= rowCount; rowNum++)
 			{
-				ArrayList<Image> contentsOfThisRow = getImages(startingFrom, startingFrom+colCount);
+				ArrayList<Image> contentsOfThisRow = getImages(startingFrom, startingFrom+(colCount-1));
 				//Check whether additional null padding entries are needed; add if necessary.
 				while (contentsOfThisRow.size() < colCount) {
 					contentsOfThisRow.add(null);
