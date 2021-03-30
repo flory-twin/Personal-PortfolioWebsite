@@ -29,9 +29,15 @@
 					<div class="row">
 						<div class="col mx-5 px-5">
 							<!-- Per-paragraph: mission statement. -->
-							<h2 class="text-center">About Me</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rutrum pellentesque velit id elementum. Aliquam leo dui, placerat vitae pulvinar sed, dignissim id quam. Aenean risus quam, efficitur vitae est ut, interdum venenatis nisl. Aenean scelerisque vehicula libero at molestie. Praesent ut augue in tortor commodo condimentum. Nulla at semper eros. Duis molestie sagittis lacus, nec scelerisque lacus condimentum quis. Nulla lacus risus, mattis eget massa a, eleifend volutpat nisi. Suspendisse a vehicula nunc.</p>
-							<p>Duis dignissim, orci quis maximus tempus, diam sapien tempus nisl, quis luctus sapien nisl et velit. Duis lobortis risus vel nunc egestas varius. Donec non elit vestibulum, aliquam sapien sed, aliquet enim. Vestibulum vitae viverra nisl, tincidunt placerat tellus. Suspendisse eget feugiat lacus. Integer in rhoncus dolor. Pellentesque euismod feugiat magna, eget auctor eros. Integer non massa quis mauris lacinia luctus. Praesent a congue velit. Pellentesque ac convallis diam. </p>
+							<h2 class="text-center">Seeking Development Work</h2>
+							<p><b>After 10 years testing software, I needed a change.</b> I wasn't satisfied with manual testing. Instead, I took every chance I could get to write code--whether test automation or utility frameworks.</p>
+							
+							<p>The problem was, <b>testing isn't about what you add to the world.</b> 
+							When I create or rework a painting, the joy is choosing how to go from an idea to something which speaks to my audience. 
+							<i>It's June--those clouds should be cumulus. I'll need watercolor to make them transparent.</i>
+							Testing is important, but it's not about adding value. <i>Is that mold on my paper?</i></p> 
+  
+							<p><b>What can I add to your team?</b></p>
 						</div>
 					</div>
 					<div class="row px-5">
@@ -68,7 +74,9 @@
 						<div class="col text-center">
 							<h2>For More Information</h2>
 							<p>LinkedIn:</p>
-							<button class="btn btn-primary">Resume (last updated ...)</button>
+							<button 
+								class="btn btn-primary"
+								onclick="location.assign('/professional/resume')">Download Resume</button>
 						</div>
 					</div>
 				</div>
