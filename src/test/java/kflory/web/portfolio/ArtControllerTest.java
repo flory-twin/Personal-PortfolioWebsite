@@ -5,37 +5,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 //Strange. Spring Boot has xmlunit-matchers as a dependency JAR, yet I had to put an explicit entry for it into the POM to make this package visible.
 //import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import javax.xml.XMLConstants;
-import javax.xml.namespace.NamespaceContext;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.util.XmlExpectationsHelper;
-import org.springframework.test.util.XpathExpectationsHelper;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import kflory.web.portfolio.controllers.ArtController;
 import kflory.web.portfolio.images.Image;
 import kflory.web.portfolio.images.ImageCollection;
-import kflory.web.testUtilites.NamespaceContextImpl;
-
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 // Note that this annotation "tells Spring Boot to look for a main configuration class (one with @SpringBootApplication, for instance) and use that to start a Spring application context."
 //  Without that, I don't get the interaction with the server which is necessary to verify final layout of JSP -> correct handoff of model.
@@ -49,7 +31,7 @@ public class ArtControllerTest {
 	
 	@Autowired
 	private TestRestTemplate restTemplate;
-
+	
 	@Test
 	public void testGetReturnsNonNull() throws Exception {
 		assertThat(

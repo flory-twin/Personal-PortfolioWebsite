@@ -72,6 +72,13 @@
 		    <artifactId>jquery</artifactId>
 		    <version>3.5.1</version>
 		</dependency>
+		<!-- Experimental: Can I make AssertJ's assertThat work with the XMLUnit matchers? -->
+		<!-- https://mvnrepository.com/artifact/org.xmlunit/xmlunit-matchers -->
+		<dependency>
+		    <groupId>org.xmlunit</groupId>
+		    <artifactId>xmlunit-matchers</artifactId>
+		</dependency>
+				
 	</dependencies>
 
 	<build>
