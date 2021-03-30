@@ -27,23 +27,23 @@
 					<div class="row">
 						<div class="col-sm"></div>
 						<div class="col-lg">
-						<button 
-							id="professionalButton"
-							class="btn eclipse-behind mr-2 pt-1" 
-							style="min-width:27vw;min-height:39vh" 
-							onclick="fireClickEvent(document.getElementById('professionalPageLink'))">
-    							<h2 class="display-4 text-center"><b>Professional</b></h2>
-						</button>
+							<button 
+								id="professionalButton"
+								class="btn eclipse-behind mr-2 pt-1" 
+								style="min-width:27vw;min-height:39vh" 
+								onclick="location.assign('/professional')">
+	    							<h2 class="display-4 text-center"><b>Professional</b></h2>
+							</button>
 						</div>
 						<div class="col-lg">
-						<!-- TODO: Add onmouseover with 'status message' (blurb about what the button does) -->
-						<button 
-							id="artButton"
-							class="btn upperpeninsula-behind ml-2 pt-1" 
-							style="min-width:27vw;min-height:39vh" 
-							onclick="fireClickEvent(document.getElementById('artPageLink'))">
-    							<h2 class="display-4 text-center"><b>Art</b></h2>
-						</button>
+							<!-- TODO: Add onmouseover with 'status message' (blurb about what the button does) -->
+							<button 
+								id="artButton"
+								class="btn upperpeninsula-behind ml-2 pt-1" 
+								style="min-width:27vw;min-height:39vh" 
+								onclick="location.assign('/art')">
+	    							<h2 class="display-4 text-center"><b>Art</b></h2>
+							</button>
 						</div>
 						<div class="col-sm"></div>
 					</div>
