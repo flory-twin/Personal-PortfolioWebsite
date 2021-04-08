@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Component;
  */
 public class MavenDefeatingFileLoader {
 	
-	
 	// Note to self: While I've tried autowiring a number of *Contexts, I've only had luck with an explicitly allocated FileSystemXmlApplicationContext.
 	//  One of the problems with autowiring is that I might need access from different types of test (full context available on down to unit); at the very least, since I was originally trying to develope using a test/code cycle, it was playing merry hob with telling what was wrong.
 	private static FileSystemXmlApplicationContext fsxac;
@@ -31,27 +31,41 @@ public class MavenDefeatingFileLoader {
 		fsxac = new FileSystemXmlApplicationContext();
 	}
 	
-	//I abhor having to do things like this, but FileSystemXmlApplicationContext.getResource() isn't returning a resource for known-good resources such as "resources/static/KFlory.Resume.pdf".
+	//I abhor having to do things like this, but even FileSystemXmlApplicationContext.getResource() isn't returning a resource for project-relative paths on known-good resources such as "resources/static/KFlory.Resume.pdf".  
 	//Thus, the use of getResources() on a single file.
 	public static Resource getResource(String relativePath) throws IOException
 	{
-		String globbedPath = globulizePath(relativePath);
-		
-		Resource[] returnedResources = fsxac.getResources(globbedPath);
-		if (returnedResources.length != 1)
+		if (relativePath == null || relativePath.isEmpty())
 		{
-				throw new FileNotFoundException("The Maven-defeating file loader found either too many files or 0 files matching " + relativePath);
+			throw new IOException("The filepath requested from the Maven-defeating file loader was blank or null.");
+		}
+		
+		String globbedPath = globulizePath(relativePath);
+		Resource[] returnedResources = fsxac.getResources(globbedPath);
+		if (returnedResources.length == 0)
+		{
+			throw new FileNotFoundException("The Maven-defeating file loader could not find a filesystem entity at " + relativePath);
+		}
+		if (returnedResources.length > 1)
+		{
+				throw new IOException("The Maven-defeating file loader found too many files matching " + relativePath);
 		}
 		
 		Resource atPath = returnedResources[0];
-		if (atPath.exists())
+		if (!atPath.getFile().isFile())
 		{
-			return atPath;
-		}	
-		else
+			throw new FileNotFoundException("The entity at relative path " + relativePath + 
+					" (canonical path " + atPath.getFile().getCanonicalPath() +
+					") exists, but is not a file.");
+		}			
+		if (!atPath.getFile().canRead())
 		{
-			throw new FileNotFoundException("The Maven-defeating file loader could not find a file at " + relativePath);
+			throw new IOException("The file at relative path " + relativePath + 
+					" (canonical path " + atPath.getFile().getCanonicalPath() +
+					") exists, but is not readable.");
 		}
+		
+		return atPath;
 	}
 	
 	private static String globulizePath(String toBeGlobbed)
