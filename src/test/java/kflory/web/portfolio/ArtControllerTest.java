@@ -1,15 +1,16 @@
 package kflory.web.portfolio;
 
-
+//Note to self: XPath assertions should have Spring support, but I can't make that work (see notes on testGetIndexParameter() below.)
+//This test uses assertj's assertThat for 'normal' assertions and org.hamcrest.MatcherAssert.assertThat for xPath.
 import static org.assertj.core.api.Assertions.assertThat;
-//Strange. Spring Boot has xmlunit-matchers as a dependency JAR, yet I had to put an explicit entry for it into the POM to make this package visible.
-//import static org.hamcrest.MatcherAssert.assertThat; 
+//For use with Hamcrest assertThat.
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -26,6 +27,10 @@ import kflory.web.portfolio.images.ImageCollection;
 // Because the parameter test is dependent on how the following are configured, override them.
 @TestPropertySource(properties = {"art.rowCount=3", "art.colCount=3"})
 public class ArtControllerTest {
+	
+	@Value("${testing.art.sourceFolder}")
+	private String artDirectoryRelativePath;
+	
 	@LocalServerPort
 	private int port;
 	
@@ -47,12 +52,13 @@ public class ArtControllerTest {
 	 *  - XmlExpectationsHelper.assertNode(...) is producing configuration errors trying to locate http://www.w3.org/TR/xhtml11/DTD/xhtml-datatypes-1.mod (reporting java.IO.FileNotFoundException).
 	 *  - And XpathExpectationsHelper.exists() (or similar) is never returning, though no error/exception occurs.
 	 */
+	//TODO: Mock 
 	public void testGetIndexParameter() throws Exception {
 		// Since this test uses the full array of initializers/sets up all beans as requested, there should be an ImageCollection in the container somewhere.
 		ImageCollection.clear();
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
+		ImageCollection.addImage(new Image(artDirectoryRelativePath + "20140516-2.jpeg"));
+		ImageCollection.addImage(new Image(artDirectoryRelativePath + "20140516-1.v2.jpeg"));
+		ImageCollection.addImage(new Image(artDirectoryRelativePath + "20140526-wildwood-5.jpg"));
 
 		HashMap<String, String> ns = new HashMap<String, String>();
 		//No, it's not intuitive naming. However, using the default namespace value (xmlns) as the prefix somehow breaks my tests.
@@ -69,6 +75,7 @@ public class ArtControllerTest {
 		String thumbnailCells = thumbnailsRoot + cells;
 		String nonEmptyThumbnailImages = thumbnailsRoot + nonEmptyImages;
 		
+		//Strange. Spring Boot has xmlunit-matchers as a dependency JAR, yet I had to put an explicit entry for it into the POM to make this package visible.
 	    org.hamcrest.MatcherAssert.assertThat(
 	    		responseString, 
 	    		org.xmlunit.matchers.EvaluateXPathMatcher.hasXPath("count(" + thumbnailCells + ")",
@@ -93,30 +100,5 @@ public class ArtControllerTest {
 	    		org.xmlunit.matchers.EvaluateXPathMatcher.hasXPath("count(" + nonEmptyThumbnailImages + ")",
 	    				equalTo("0"))
 	    		.withNamespaceContext(ns));
-		
-
-//		//3 images: Still has 3x3, but if started higher then index=2, none onscreen.
-//		assertThat(
-//				this.restTemplate.getForObject(
-//					"http://localhost:" + port + "/art" + "?startingFrom=3",
-//					String.class))
-//				.contains("id=\"row3col3")
-//				.doesNotContainPattern("img.*src=\"[A-Za-z1-9\\/]+");
-
-//		byte[] responseBytes = this.restTemplate.getForObject(
-//		"http://localhost:" + port + "/art" + "?startingFrom=2",
-//		String.class).getBytes();
-//XpathExpectationsHelper x = new XpathExpectationsHelper("//div[@id = 'row3col3']", null);
-//x.assertNodeCount(responseBytes, null, 1);
-////x.exists(responseBytes, null);
-
-//XmlExpectationsHelper xml = new XmlExpectationsHelper();
-//String responseFrom2 = this.restTemplate.getForObject(
-//		"http://localhost:" + port + "/art" + "?startingFrom=2",
-//		String.class);
-//xml.assertNode(responseFrom2, 
-//	hasXPath("//div[@id = 'row3col3']"));
-//xml.assertNode(responseFrom2, 
-//		hasXPath("//img[@src != ''"));
 	}
 }

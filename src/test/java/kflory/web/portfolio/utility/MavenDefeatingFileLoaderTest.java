@@ -1,9 +1,10 @@
 package kflory.web.portfolio.utility;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +13,14 @@ import org.assertj.core.api.Assertions;
 
 /*
  * Note: I realize it's poor practice to couple a unit test to the file system. Unfortunately, I can only seem to get Spring's relative-path ResourceLoader loading to work in highly specific ways on my system.
- * This was frustrating to solve and is a fragile solution, so a tightly coupled test that tells me when my loader is failing is still very valuable. 
+ * This was frustrating to solve and is a fragile solution, so a tightly coupled test that tells me when my loader is failing is still very valuable.
  */
+@SpringBootTest
 public class MavenDefeatingFileLoaderTest {
+	//During testing, the source folder resource location should be used--not the WAR location.
+	@Value("${testing.art.sourceFolder}")
+	private String pathToArt;
+	
 	@Test
 	public void testExceptionsTo_getResource() {
 		Assertions.assertThatIOException()
@@ -76,41 +82,51 @@ public class MavenDefeatingFileLoaderTest {
 				.size())
 			.isEqualTo(0);
 	}
-		
+	
 	@Test
-	public void testPositivePath_EnumerateDescendantFiles_acceptablePathFormats() throws Exception
+	public void testPositivePath_EnumerateDescendantFiles_canGetFilesFromMultipleLevels() throws Exception
 	{ 
 		String[] singleValidPictureType = {".jpg"};
 		
-		ArrayList<Resource> resources = MavenDefeatingFileLoader.enumerateDescendantFiles("/resources/static/art/", singleValidPictureType);
+		ArrayList<Resource> resources = MavenDefeatingFileLoader.enumerateDescendantFiles(pathToArt, singleValidPictureType);
 		Assertions.assertThat(resources.size())
 			.isGreaterThan(0);
 		int priorCountOfFiles = resources.size();
+		String[] pathSteps = pathToArt.split("/");
 		
-		resources = MavenDefeatingFileLoader.enumerateDescendantFiles("resources/static/art/", singleValidPictureType);
-		Assertions.assertThat(resources.size())
-			.isEqualTo(priorCountOfFiles);
-		
-		resources = MavenDefeatingFileLoader.enumerateDescendantFiles("resources/static/art", singleValidPictureType);
-		Assertions.assertThat(resources.size())
-			.isEqualTo(priorCountOfFiles);
+		if (pathSteps.length > 0)
+		{
+			for (int pathSepCount = pathSteps.length - 1; pathSepCount > 0; pathSepCount-- )
+			{
+				String lessSpecificPath = "";
+				for (int stepNo = 0; stepNo < pathSepCount; stepNo++)
+				{
+					lessSpecificPath += pathSteps[stepNo] + "/";
+				}
+				
+				resources = MavenDefeatingFileLoader.enumerateDescendantFiles(lessSpecificPath, singleValidPictureType);
+				Assertions.assertThat(resources.size())
+					.isGreaterThanOrEqualTo(priorCountOfFiles);
+				priorCountOfFiles = resources.size();
+			}
+		}
 	}
 	
 	@Test
 	public void testPositivePath_EnumerateDescendantFiles_showingPathSpecificity() throws Exception{
 		String[] singleValidPictureType = {".jpg"};
 		
-		ArrayList<Resource> resources = MavenDefeatingFileLoader.enumerateDescendantFiles("resources/static/art/", singleValidPictureType);
+		ArrayList<Resource> resources = MavenDefeatingFileLoader.enumerateDescendantFiles(pathToArt, singleValidPictureType);
 		Assertions.assertThat(resources.size())
 			.isGreaterThan(0);
 		int priorCountOfFiles = resources.size();
 		
-		resources = MavenDefeatingFileLoader.enumerateDescendantFiles("resources/static/", singleValidPictureType);
+		resources = MavenDefeatingFileLoader.enumerateDescendantFiles(pathToArt, singleValidPictureType);
 		Assertions.assertThat(resources.size())
 			.isGreaterThanOrEqualTo(priorCountOfFiles);
 		priorCountOfFiles = resources.size();
 	
-		resources = MavenDefeatingFileLoader.enumerateDescendantFiles("resources/", singleValidPictureType);
+		resources = MavenDefeatingFileLoader.enumerateDescendantFiles(pathToArt, singleValidPictureType);
 		Assertions.assertThat(resources.size())
 			.isGreaterThanOrEqualTo(priorCountOfFiles);
 		priorCountOfFiles = resources.size();

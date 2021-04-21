@@ -30,7 +30,7 @@ public class ProfessionalController {
 		produces = MediaType.APPLICATION_PDF_VALUE
 	)
 	public ResponseEntity<byte[]> getResume(ServletRequest request) throws IOException, URISyntaxException {
-		Resource r = MavenDefeatingFileLoader.getResource("resources/static/KFlory.Resume.pdf");
+		Resource r = MavenDefeatingFileLoader.getResource("static/KFlory.Resume.pdf");
 		byte[] toReturn = Files.readAllBytes(r.getFile().toPath());
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentDisposition(

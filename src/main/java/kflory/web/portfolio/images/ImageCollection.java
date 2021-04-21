@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.Resource;
@@ -22,11 +23,10 @@ import kflory.web.portfolio.utility.MavenDefeatingFileLoader;
 @Component
 @Scope("singleton")
 public class ImageCollection {
-	//The path from which art resources should be pulled.
-	@Value("${art.relativeResourceFolder}")
-	private String artDirectoryRelativePath;
-	//The path, somewhere under the project root, relative to which stored paths should be formatted/
-	private String artDirectoryTargetRelativePath="art/";
+	//The path a .jsp page will need to fetch an image at runtime from inside a WAR or JAR.
+	//Note that this is not the same as the source location due to how Maven maps source resources to WAR'd resources.
+	@Value("${art.warJarPath}")
+	private String artDirectoryWarJarPath="/images/art/";
 	
 	@Value("#{new String(\"${art.filetypes}\").split(\",\")}")
 	private String[] filetypes = null;
@@ -41,12 +41,12 @@ public class ImageCollection {
 	
 	@PostConstruct 
 	public void loadFromFileSystem() throws FileSystemException, IOException {
-		loadFromFileSystem(artDirectoryRelativePath);
+		loadFromFileSystem(artDirectoryWarJarPath);
 	}
 	
 	/**
-     * I'm using Maven during runtime, and having some trouble getting the normal resource loading system to run as expected. As such, I've had to do some extra work...
-	 * @param root Where to pull images from, relative to the project root. Path steps should be separated by '/'. Each step should name a folder.
+     * 
+	 * @param root Where to pull images from, relative to the root of the WAR produced by a Maven install. Path steps should be separated by '/'. Each step should name a folder.
 	 * @throws FileSystemException
 	 * @throws IOException
 	 */
@@ -56,19 +56,10 @@ public class ImageCollection {
 		
 		ImageCollection.clear();
 		
-		//Clip each of the file paths to start at the target relative directory.
-		//I've been using Unix paths relative to the project root internally, so convert to Windows first if needed...
-		String targetRootAsSystemSpecificFragment = this.artDirectoryTargetRelativePath.replace("/", File.separator);
 		for (Resource r : artResources)
 		{
-			//This path is canonical and absolute relative to the system root.  
-			String pathString = r.getFile().getPath();
-			//The "paths" we need to record in the image list should use an abstract file path relative to the project root, starting without "/".
 			ImageCollection.addImage(
-				new Image(
-					pathString.substring(
-						pathString.indexOf(targetRootAsSystemSpecificFragment))
-					.replace(File.separator, "/"))); //If it's a Windows path, convert back to the format I'm using...
+					new Image(r.getFile().getPath()));
 		}
 	}
 	
