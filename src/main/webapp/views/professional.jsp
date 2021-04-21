@@ -30,7 +30,7 @@
 							<h2 class="text-center">Seeking Development Work</h2>
 							<p><b>I need a change.</b> After 10 years doing QA, I wasn't satisfied with manual testing.</p>
 							
-							<p>As an artist, I already know there's enormous joy in creation--going from an idea, whether mine or someone else's, and choosing how to make it reality. The problem was, <b>testing isn't about what you add to the world.</b></p>
+							<p>As an artist, I already know there's enormous joy in creation--going from an idea, whether mine or someone else's, and choosing how to make it reality. The problem was, <b>testing isn't about creation.</b></p>
 
 							<p>I want to create again, but I already know my best work is created <b>with others</b>. For instance, when I refreshed my skills at the Grand Circus coding bootcamp, I learned the most by facilitating a regular study group for out-of-classroom coworking; all of our code improved.</p>    
 							

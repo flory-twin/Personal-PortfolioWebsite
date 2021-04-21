@@ -7,10 +7,8 @@
 	<head>
 	    <meta charset="utf-8"/>
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
-		
-
 		<title>Kevin's Art</title>
+		<!-- Links to CSS and styling packages -->
 		<!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3Fme2BM4boCE9tHx9zHvcxaQoAkksPQa/8oyn1Dzqv7gdcXChereUsXGx6LtbqA" crossorigin="anonymous"> -->
 		<!-- <link href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>-->
 		<link 
@@ -19,7 +17,6 @@
 			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
 			crossorigin="anonymous"/>
 		<link href="css/index.css" rel="stylesheet"/>
-		<link href="css/debug.css" rel="stylesheet"/>
 	</head>
 	
 

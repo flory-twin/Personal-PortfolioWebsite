@@ -47,14 +47,6 @@
 						</div>
 						<div class="col-sm"></div>
 					</div>
-					<a 
-						id="artPageLink"
-						href="/art" 
-						style="display:none">Go to art page</a>
-					<a 
-						id="professionalPageLink"
-						href="/professional" 
-						style="display:none">Go to professional page</a>
 				</div>
 			</div>
 			
