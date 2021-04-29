@@ -17,6 +17,7 @@
 			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
 			crossorigin="anonymous"/>
 		<link href="css/index.css" rel="stylesheet"/>
+		<link href="css/signature-behind.css" rel="stylesheet"/>
 	</head>
 	
 
@@ -47,7 +48,7 @@
 				</c:forEach>
 			</div>
 			
-			<%@include file="/views/fragments/builtWith.jspf" %>
+			<jsp:include page="fragments/builtWith.jsp"/>
 		</main>
 		
 		<script src="custom.js"></script>

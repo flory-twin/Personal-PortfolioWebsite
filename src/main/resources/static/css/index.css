@@ -1,10 +1,3 @@
-.signature-behind {
-    background-image: url("/images/Signature-masked.jpg");
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
 .eclipse-behind {
     background-image: url("/images/eclipseView-masked.png");
 	background-position: center center;
@@ -17,24 +10,6 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
-}
-
-.statue-behind {
-    background-image: url("/art/AdmiralPerry/admiralPerry4.png");
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}
-
-.shrink {
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}
-
-.img-sm {
-	max-height: 100%;
-	width: auto;
 }
 
 .custom-gray {

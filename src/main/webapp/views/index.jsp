@@ -9,21 +9,24 @@
 		<!-- <link href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet"/>-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link href="css/index.css" rel="stylesheet"/>
+		<link href="css/signature-behind.css" rel="stylesheet"/>
 	</head>
 	
 
 	<body>
 		<main>
-			<!--  Looking for Kevin's Grand Circus graduation project?  -->
+
 			<div class="container-fluid mt-5 mb-3">
 				<!-- TODO: Encapsulate as tag; see https://stackoverflow.com/questions/23604033/is-including-other-jsp-via-the-spring-mvc-framework-a-good-idea and https://docs.oracle.com/javaee/5/tutorial/doc/bnama.html. -->
-				<div 
-					class="container signature-behind justify-content-center mt-5" 
-					style="min-height:25vh;max-height:30vh;max-width:73vw">
-					<h1 class="display-2 text-center"><b>Kevin Flory</b></h1>
+				<div
+				  style="min-height:25vh;max-height:30vh;max-width:73vw"
+				  class="container signature-behind mt-5 justify-content-center">
+				    <h1 class="display-2 text-center"><b>Kevin Flory</b></h1>
 				</div>
 				
-				<div class="container justify-content-center mt-3 mb-5 pb-5" style="min-height:40vh">
+				<div 
+				  style="min-height:40vh"
+				  class="container  mt-3 mb-5 pb-5 justify-content-center">
 					<div class="row">
 						<div class="col-sm"></div>
 						<div class="col-lg">
@@ -50,10 +53,11 @@
 				</div>
 			</div>
 			
-			<%@include file="/views/fragments/builtWith.jspf" %>
+			<jsp:include page="fragments/builtWith.jsp"/>
 		</main>
 		
 		<script src="js/index.js"/>
+		<script src="js/header.js"/>
 		<script src="js/workingOnSiteAlert.js"/>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
 	      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 

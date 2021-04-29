@@ -11,16 +11,17 @@
 		<title>Kevin Flory's Portfolio: Professional Information</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link href="css/index.css" rel="stylesheet"/>
+		<link href="css/signature-behind.css" rel="stylesheet"/>
 	</head>
 	
 
 	<body>
 		<main>
 			<div class="container-fluid mt-5 mb-3">
-				<div 
-					class="container signature-behind justify-content-center mt-3" 
-					style="min-height:25vh;max-height:30vh;max-width:73vw">
-					<h1 class="display-3 text-center"><b>Professional Data</b></h1>
+				<div
+				  style="min-height:25vh;max-height:30vh;max-width:73vw"
+				  class="container signature-behind mt-5 justify-content-center">
+				    <h1 class="display-2 text-center"><b>Kevin Flory</b></h1>
 				</div>
 				
 				<div class="container justify-content-center mt-3 mb-5 pb-5" style="min-height:40vh">
@@ -51,7 +52,7 @@
 				</div>
 			</div>
 			
-			<%@include file="/views/fragments/builtWith.jspf" %>
+			<jsp:include page="fragments/builtWith.jsp"/>
 		</main>
 		
 		<script src="js/download.js"></script>
