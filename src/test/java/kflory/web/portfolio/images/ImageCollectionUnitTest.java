@@ -17,42 +17,37 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 
-/* 
- * Note potential use of:
- * @TestPropertySource(properties = {
-	    "art.relativeResourceFolder=resources/static/art/",
-	    "art.filetypes=.jpeg,.jpg,.png",
-	})
- */
+// Note that none of the following tests actually depend on files existing at these paths, within the project or at any point in the underlying filesystem.
 public class ImageCollectionUnitTest {
 	ImageCollection ic = new ImageCollection();
 	
 	public void smallArray() {
 		ImageCollection.clear();
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
+		ImageCollection.addImage(new Image("string1"));
+		ImageCollection.addImage(new Image("string2"));
+		ImageCollection.addImage(new Image("string3"));
 	}
 	
 	public void arrayOf15() {
 		ImageCollection.clear();
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
-		ImageCollection.addImage(new Image("/art/20140516-2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image("/art/20140526-wildwood-5.jpg"));
+		ImageCollection.addImage(new Image("string4"));
+		ImageCollection.addImage(new Image("string5"));
+        ImageCollection.addImage(new Image("string6"));
+        ImageCollection.addImage(new Image("string7"));
+        ImageCollection.addImage(new Image("string8"));
+        ImageCollection.addImage(new Image("string9"));
+        ImageCollection.addImage(new Image("string10"));
+        ImageCollection.addImage(new Image("string11"));
+        ImageCollection.addImage(new Image("string12"));
+        ImageCollection.addImage(new Image("string13"));
+        ImageCollection.addImage(new Image("string14"));
+        ImageCollection.addImage(new Image("string15"));
+        ImageCollection.addImage(new Image("string16"));
+        ImageCollection.addImage(new Image("string17"));
+        ImageCollection.addImage(new Image("string18"));
 	}
 	
+	//Static array, does not use file loading
 	@Test
 	public void testIndexStart() {
 		smallArray();
@@ -67,6 +62,7 @@ public class ImageCollectionUnitTest {
 			.allMatch(img -> img.getRelativeResourcePath().length() > 0);
 	}
 	
+	//Static array, does not use file loading
 	@Test
 	public void testIndexSafety() {
 		smallArray();
@@ -81,6 +77,7 @@ public class ImageCollectionUnitTest {
 			.allMatch(img -> img.getRelativeResourcePath().length() > 0);
 	}
 	
+	//Static array, does not use file loading
 	@Test
 	public void testArrayCorrectness() {
 		smallArray();

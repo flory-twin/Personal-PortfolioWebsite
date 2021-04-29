@@ -20,17 +20,23 @@ import kflory.web.portfolio.utility.MavenDefeatingFileLoader;
  * @author kflory
  *
  */
+//TODO Turn this into a service.
 @Component
 @Scope("singleton")
 public class ImageCollection {
-	//The path a .jsp page will need to fetch an image at runtime from inside a WAR or JAR.
-	//Note that this is not the same as the source location due to how Maven maps source resources to WAR'd resources.
-	@Value("${art.warJarPath}")
-	private String artDirectoryWarJarPath="/images/art/";
 	
+	// The path from which this class should gather images.
+    @Value("#{\"${resource.sourceFolder}\" + \"${art.resource.subfolder}\"}")
+	private String artDirectoryResourcePath;
+	
+    // The filetypes to gather into the image collection.
 	@Value("#{new String(\"${art.filetypes}\").split(\",\")}")
 	private String[] filetypes = null;
 
+	// The path relative to which images should be identified.
+	@Value("${art.outputPath}")
+	private String rootToUseWhenOutputtingArtFilePath;
+	
 	private static ArrayList<Image> allImages;
 	static {
 		allImages = new ArrayList<Image>();
@@ -39,28 +45,22 @@ public class ImageCollection {
 	public ImageCollection() {
 	}
 	
-	@PostConstruct 
-	public void loadFromFileSystem() throws FileSystemException, IOException {
-		loadFromFileSystem(artDirectoryWarJarPath);
-	}
-	
 	/**
-     * 
-	 * @param root Where to pull images from, relative to the root of the WAR produced by a Maven install. Path steps should be separated by '/'. Each step should name a folder.
+	 * Automatically scan art.resource.subfolder for images of the types listed in art.filetypes.
 	 * @throws FileSystemException
 	 * @throws IOException
 	 */
-	public void loadFromFileSystem(String root) throws FileSystemException, IOException {
-		
-		ArrayList<Resource> artResources = MavenDefeatingFileLoader.enumerateDescendantFiles(root, filetypes);
-		
-		ImageCollection.clear();
-		
-		for (Resource r : artResources)
-		{
-			ImageCollection.addImage(
-					new Image(r.getFile().getPath()));
-		}
+	@PostConstruct 
+	public void loadFromFileSystem() throws FileSystemException, IOException {
+        ImageCollection.clear();
+        ArrayList<Resource> artResources = MavenDefeatingFileLoader.enumerateDescendantFiles(artDirectoryResourcePath, filetypes);
+        ArrayList<String> relativeArtPaths = MavenDefeatingFileLoader.getRelativeResourcePaths(artResources, rootToUseWhenOutputtingArtFilePath);
+        
+        for (String imagePath : relativeArtPaths)
+        {
+            ImageCollection.addImage(
+                new Image(imagePath));
+        }
 	}
 	
 	/**

@@ -27,10 +27,6 @@ import kflory.web.portfolio.images.ImageCollection;
 // Because the parameter test is dependent on how the following are configured, override them.
 @TestPropertySource(properties = {"art.rowCount=3", "art.colCount=3"})
 public class ArtControllerTest {
-	
-	@Value("${testing.art.sourceFolder}")
-	private String artDirectoryRelativePath;
-	
 	@LocalServerPort
 	private int port;
 	
@@ -53,12 +49,16 @@ public class ArtControllerTest {
 	 *  - And XpathExpectationsHelper.exists() (or similar) is never returning, though no error/exception occurs.
 	 */
 	//TODO: Mock 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public void testGetIndexParameter() throws Exception {
-		// Since this test uses the full array of initializers/sets up all beans as requested, there should be an ImageCollection in the container somewhere.
+		// Since this test is a @SpringBootTest, the image collection will have been initialized during environment setup. Override its values with a minimal number of  
 		ImageCollection.clear();
-		ImageCollection.addImage(new Image(artDirectoryRelativePath + "20140516-2.jpeg"));
-		ImageCollection.addImage(new Image(artDirectoryRelativePath + "20140516-1.v2.jpeg"));
-		ImageCollection.addImage(new Image(artDirectoryRelativePath + "20140526-wildwood-5.jpg"));
+		ImageCollection.addImage(new Image("somePathString"));
+		ImageCollection.addImage(new Image("somePathString"));
+		ImageCollection.addImage(new Image("somePathString"));
 
 		HashMap<String, String> ns = new HashMap<String, String>();
 		//No, it's not intuitive naming. However, using the default namespace value (xmlns) as the prefix somehow breaks my tests.
