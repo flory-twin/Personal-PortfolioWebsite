@@ -130,4 +130,8 @@ public class ImageCollection {
 	{
 		allImages.clear();
 	}
+	
+    public int count() {
+        return allImages.size();
+    }
 }

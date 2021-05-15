@@ -148,8 +148,15 @@ public class ImageCollectionUnitTest {
 				img -> assertThat(img).isNotNull());
 	}
 	
-	//Should I resolve how to configure a FileSystemXmlApplicationContext into the system so that I can use an autowired field to inject a mock, I'd like the following tests at minimum on .loadFromFileSystem(...):
-	//if none of type or none at location, none load.
-	//if location dne, exception
-	//incidental: not-default
+    @Test
+    public void testCount() {
+        ImageCollection.clear();
+        assertThat(ic.count()).isEqualTo(0);
+        
+        smallArray();
+        assertThat(ic.count()).isEqualTo(3);
+        
+        arrayOf15();
+        assertThat(ic.count()).isEqualTo(15);
+    }
 }

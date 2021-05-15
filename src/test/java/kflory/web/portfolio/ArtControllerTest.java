@@ -69,7 +69,7 @@ public class ArtControllerTest {
 				"http://localhost:" + port + "/art" + "?startingFrom=2",
 				String.class);
 		
-		String thumbnailsRoot = "//derp:div[@id = 'thumbnailArray']";
+		String thumbnailsRoot = "//derp:div[@id = 'thumbnailPane']";
 		String cells = "//derp:div[contains(@class, 'col')]";
 		String nonEmptyImages = "//derp:img[@src != '']";
 		String thumbnailCells = thumbnailsRoot + cells;

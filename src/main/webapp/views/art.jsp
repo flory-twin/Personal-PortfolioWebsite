@@ -34,33 +34,33 @@
 		<c:choose>
 			<c:when test="${ startingFrom > 0 }">
 				<button 
-					id="priorPaneButton"
+					id="lastPaneButton"
 					class="btn btn-primary d-inline"  
 					onclick="location.assign('/art?startingFrom=${startingFrom - pageSize}')"
 					>Last ${ pageSize }</button>
 			</c:when>
 			<c:otherwise>
 				<button 
-					id="priorPaneButton" 
+					id="lastPaneButton" 
 					class="btn btn-primary"
 					onclick="location.assign('/art?startingFrom=0')"
-					disabled>Last ${ pageSize }</button>
+					disabled="true">Last ${ pageSize }</button>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
 			<c:when test="${ startingFrom + pageSize < lastIndex }">
 				<button 
-					id="lastPaneButton"
+					id="nextPaneButton"
 					class="btn btn-primary d-inline"  
 					onclick="location.assign('/art?startingFrom=${startingFrom + pageSize}')"
 					>Next ${ pageSize }</button>
 			</c:when>
 			<c:otherwise>
 				<button 
-					id="lastPaneButton" 
+					id="nextPaneButton" 
 					class="btn btn-primary"
 					onclick="location.assign('/art?startingFrom=${startingFrom}')"
-					disabled>Next ${ pageSize }</button>
+					disabled="true">Next ${ pageSize }</button>
 			</c:otherwise>
 		</c:choose>
 	</div>
