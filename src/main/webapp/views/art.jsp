@@ -17,6 +17,7 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous" />
 <link href="css/index.css" rel="stylesheet" />
+<link href="css/art.css" rel="stylesheet" />
 <link href="css/signature-behind.css" rel="stylesheet" />
 </head>
 
@@ -50,14 +51,14 @@
 		<c:choose>
 			<c:when test="${ startingFrom + pageSize < lastIndex }">
 				<button 
-					id="nextPaneButton"
+					id="lastPaneButton"
 					class="btn btn-primary d-inline"  
 					onclick="location.assign('/art?startingFrom=${startingFrom + pageSize}')"
 					>Next ${ pageSize }</button>
 			</c:when>
 			<c:otherwise>
 				<button 
-					id="nextPaneButton" 
+					id="lastPaneButton" 
 					class="btn btn-primary"
 					onclick="location.assign('/art?startingFrom=${startingFrom}')"
 					disabled="true">Next ${ pageSize }</button>
@@ -73,10 +74,14 @@
 			<div class="row" id="row${rowNum}">
 				<c:forEach var="col" varStatus="colStatus" items="${row}">
 					<c:set var="colNum" value="${colStatus.getCount()}" />
-					<div id="row${rowNum}col${colNum}" class="col text-center"
+					<div id="row${rowNum}col${colNum}Cell" class="col text-center"
 						style="max-height: 33vh; min-height: 33vh">
-						<img class="btn btn-secondary p-2" src="${col.relativeResourcePath}"
-							style="max-height: 100%; max-width: 100%" />
+							<button 
+								id="row${rowNum}col${colNum}Button"
+								style="background-image: url('${ col.relativeResourcePath }');width: 100%;height: 100%"
+								class="btn btn-secondary center-background-image" 
+								 
+								onclick="location.assign('/${ col.relativeResourcePath }')"/>
 					</div>
 				</c:forEach>
 			</div>

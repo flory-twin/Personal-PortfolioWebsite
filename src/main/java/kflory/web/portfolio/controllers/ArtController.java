@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,11 +49,7 @@ public class ArtController {
 				.addAttribute("lastIndex", ic.count()-1 ));
 	}
 	
-	// Model becomes separate from view?
-	// Model wld need paths to thumbs and paths to full. Cld make sense to use client-end code to break down larger send.
-	//pt of fact, load time if including model always at max? it IS just a big string
-	// ...wait. Think I'm confusing 'JSP makes page containing image path literals, wh can be fetched'
-	// specify lazy load for images
-	// image thumbnail 'pointer' list
-	// full image (handled always by html? but will need responsebody for img download
+    // Note to self: My art JSP currently makes image requests by adding the Image's relative path to the base URL. And because of how I've constructed things, that translates directly to a servable resource.
+    // Therefore, there's no need to provide a request handler for any image URL. Those end in a filename, and the DispatcherServlet routes such via SimpleUrlHanderMapping to the ResourceHttpRequestHandler, instead of using the RequestMappingHandlerMapping to map to a @RequestMapping- or @{Verb}Mapping-annotated controller method.  
 }
+

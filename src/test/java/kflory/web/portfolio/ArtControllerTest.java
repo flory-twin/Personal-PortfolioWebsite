@@ -71,14 +71,16 @@ public class ArtControllerTest {
 		
 		String thumbnailsRoot = "//derp:div[@id = 'thumbnailPane']";
 		String cells = "//derp:div[contains(@class, 'col')]";
-		String nonEmptyImages = "//derp:img[@src != '']";
+		String images = "//derp:button[contains(@style, \"background-image: url\")]";
+		String nonEmptyImages = "//derp:button[contains(@style, \"background-image: url\")][not(contains(@style, \"background-image: url('')\"))]";
+		String emptyImages = "//derp:button[contains(@style, 'background-image:url('')]";
 		String thumbnailCells = thumbnailsRoot + cells;
 		String nonEmptyThumbnailImages = thumbnailsRoot + nonEmptyImages;
 		
 		//Strange. Spring Boot has xmlunit-matchers as a dependency JAR, yet I had to put an explicit entry for it into the POM to make this package visible.
 	    org.hamcrest.MatcherAssert.assertThat(
 	    		responseString, 
-	    		org.xmlunit.matchers.EvaluateXPathMatcher.hasXPath("count(" + thumbnailCells + ")",
+	    		org.xmlunit.matchers.EvaluateXPathMatcher.hasXPath("count(" + images + ")",
 	    				equalTo("9"))
 	    		.withNamespaceContext(ns));
 	    org.hamcrest.MatcherAssert.assertThat(
