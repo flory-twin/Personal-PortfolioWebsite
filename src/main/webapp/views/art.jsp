@@ -12,52 +12,56 @@
 		<!-- Links to CSS and styling packages -->
 		<!--  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3Fme2BM4boCE9tHx9zHvcxaQoAkksPQa/8oyn1Dzqv7gdcXChereUsXGx6LtbqA" crossorigin="anonymous"> -->
 		<link rel="stylesheet" href="webjars/bootstrap/4.0.0/css/bootstrap.min.css"/>
-		<link href="css/index.css" rel="stylesheet" />
 		<link href="css/art.css" rel="stylesheet" />
 		<link href="css/signature-behind.css" rel="stylesheet" />
+		<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<main> <!--  Looking for Kevin's Grand Circus graduation project?  -->
-	
-		<div class="container signature-behind py-5">
-			<h1 class="display-1 text-center justify-content-center">Kevin Flory</h1>
-		</div>
+			<div
+			  style="min-height:20vh;max-height:30vh;max-width:73vw"
+			  class="container signature-behind mt-5 justify-content-center">
+			    <h1 class="display-2 text-center"><b>Kevin Flory</b></h1>
+			</div>
 	
 		<div 
-			id="thumbnailPane" 
+			id="thumbnailAndControlsPane" 
 			class="container-fluid">
-			<c:choose>
-				<c:when test="${ startingFrom > 0 }">
-					<button 
-						id="lastPaneButton"
-						class="btn btn-primary d-inline"  
-						onclick="location.assign('/art?startingFrom=${startingFrom - pageSize}')"
-						>Last ${ pageSize }</button>
-				</c:when>
-				<c:otherwise>
-					<button 
-						id="lastPaneButton" 
-						class="btn btn-primary"
-						onclick="location.assign('/art?startingFrom=0')"
-						disabled="true">Last ${ pageSize }</button>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${ startingFrom + pageSize < lastIndex }">
-					<button 
-						id="lastPaneButton"
-						class="btn btn-primary d-inline"  
-						onclick="location.assign('/art?startingFrom=${startingFrom + pageSize}')"
-						>Next ${ pageSize }</button>
-				</c:when>
-				<c:otherwise>
-					<button 
-						id="lastPaneButton" 
-						class="btn btn-primary"
-						onclick="location.assign('/art?startingFrom=${startingFrom}')"
-						disabled="true">Next ${ pageSize }</button>
-				</c:otherwise>
-			</c:choose>
+			<div 
+				id="thumbnailControls"
+				class="container text-center">
+						<c:choose>
+							<c:when test="${ startingFrom > 0 }">
+								<button 
+									id="lastPaneButton"
+									class="btn btn-primary"  
+									onclick="location.assign('/art?startingFrom=${startingFrom - pageSize}')"
+									>Last ${ pageSize }</button>
+							</c:when>
+							<c:otherwise>
+								<button 
+									id="lastPaneButton" 
+									class="btn btn-primary"
+									onclick="location.assign('/art?startingFrom=0')"
+									disabled="true">Last ${ pageSize }</button>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${ startingFrom + pageSize < lastIndex }">
+								<button 
+									id="lastPaneButton"
+									class="btn btn-primary"  
+									onclick="location.assign('/art?startingFrom=${startingFrom + pageSize}')"
+									>Next ${ pageSize }</button>
+							</c:when>
+							<c:otherwise>
+								<button 
+									id="lastPaneButton" 
+									class="btn btn-primary"
+									onclick="location.assign('/art?startingFrom=${startingFrom}')"
+									disabled="true">Next ${ pageSize }</button>
+							</c:otherwise>
+						</c:choose>
+			</div>
 		</div>
 	
 	
@@ -68,7 +72,7 @@
 					<c:forEach var="col" varStatus="colStatus" items="${row}">
 						<c:set var="colNum" value="${colStatus.getCount()}" />
 						<div id="row${rowNum}col${colNum}Cell" class="col text-center"
-							style="max-height: 33vh; min-height: 33vh">
+							style="max-height: 30vh; min-height: 30vh">
 								<button
 									id="row${rowNum}col${colNum}Button"
 									style="background-image: url('${ col.relativeResourcePath }'); width: 100%; height: 100%"
@@ -80,11 +84,6 @@
 			</c:forEach>
 		</div>
 	
-		<jsp:include page="fragments/builtWith.jsp" /> </main>
-	
-		<script src="custom.js"></script>
-		<script src="webjars/jquery/3.5.1/jquery.slim.min.js"/>
-		<script src="webjars/popper.js/1.11.1/dist/popper.min.js"/>
-		<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<jsp:include page="fragments/builtWith.jsp" />
 	</body>
 </html>

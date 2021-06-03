@@ -7,14 +7,14 @@
 	    <!-- Required meta tags -->
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Kevin Flory's Portfolio: Professional Information</title>
+		<title>Kevin Flory: Professional Information</title>
 		<link rel="stylesheet" href="webjars/bootstrap/4.0.0/css/bootstrap.min.css"/>
-		<link href="css/index.css" rel="stylesheet"/>
 		<link href="css/signature-behind.css" rel="stylesheet"/>
+		<script src="js/download.js"></script>
 	</head>
 	
 	<body>
-		<main>
+
 			<div class="container-fluid mt-5 mb-3">
 				<div
 				  style="min-height:25vh;max-height:30vh;max-width:73vw"
@@ -51,14 +51,6 @@
 			</div>
 			
 			<jsp:include page="fragments/builtWith.jsp"/>
-		</main>
-		
-		<script src="js/download.js"></script>
-		<script src="js/workingOnSiteAlert.js"/>
-		<script src="webjars/jquery/3.5.1/jquery.slim.min.js"/>
-		<script src="webjars/popper.js/1.11.1/dist/popper.min.js"/>
-		<script src="webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 	</body>
-	
-	
 </html>
